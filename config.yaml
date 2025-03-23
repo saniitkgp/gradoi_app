@@ -1,0 +1,9 @@
+task:
+  task_menu:
+    - Image Sharpness
+    - Image Segmentation
+    - Image Mask Generation
+    - Face Detection & Recognition
+    - Image Editing
+    - Lyric Generation
+    - Music Generation
