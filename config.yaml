@@ -3,7 +3,9 @@ task:
     - Image Sharpness
     - Image Segmentation
     - Image Mask Generation
+    - Image Generation
     - Face Detection & Recognition
     - Image Editing
     - Lyric Generation
     - Music Generation
+    - Image Annotation

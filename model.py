@@ -1,5 +1,8 @@
 import cv2
 import logging
+import torch
+from diffusers import StableDiffusionPipeline
+
 
 # Configure logging
 logging.basicConfig(
@@ -51,3 +54,24 @@ class Imagesharpeness:
     def reset(self):
         """Clears both input and output images."""
         return None, None
+    
+    
+class ImageGeneration:
+    """Handles image generation logic."""
+    def __init__(self):
+        self._load_model()
+        
+    def reset(self):
+        """Clears both input and output images."""
+        return None, None
+    
+    def _load_model(self):
+        self.device = "cuda" if torch.cuda.is_available() else "cpu"
+        print("device set to : ",self.device)
+        self.model = StableDiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16).to(self.device)
+        self.model.enable_attention_slicing()
+
+    def generate_image(self,prompt: str, guidance_scale: float, width: int, height: int, inference_steps: int):
+        # self._load_model()
+        image = self.model(prompt, guidance_scale=guidance_scale, num_inference_steps=inference_steps).images[0]
+        return image
